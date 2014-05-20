@@ -8,7 +8,9 @@ namespace Davang.Parser.Dto
 {
     public class Item : BaseEntity<string>
     {
-        public Feed Feed { get; set; }
+        //public Feed Feed { get; set; }
+        public Guid FeedId { get; set; }
+        public bool Read { get; set; }
 
         #region Syndication
 

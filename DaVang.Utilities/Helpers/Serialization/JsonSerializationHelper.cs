@@ -38,7 +38,7 @@ namespace Davang.Utilities.Helpers.Serialization
 
             try
             {
-                var map = JsonConvert.SerializeObject(graph);
+                var map = JsonConvert.SerializeObject(graph, Formatting.Indented, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Serialize});
                 writer.Write(map);
                 return true;
             }

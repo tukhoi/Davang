@@ -10,21 +10,34 @@ namespace Davang.Parser.Dto
     {
         public string Name { get; set; }
         public string Link { get; set; }
-        public IList<Feed> Feeds { get; set; }
+        //public IList<Feed> Feeds { get; set; }
+        public IList<Guid> FeedIds { get; set; }
         public Uri ImageUri { get; set; }
 
         public Publisher()
         {
-            Feeds = new List<Feed>();
+            FeedIds = new List<Guid>();
         }
 
-        public void AddFeed(Feed feed)
+        public void AddFeedId(Guid feedId)
         {
-            if (feed == null) return;
-            if (Feeds.FirstOrDefault(f => f.Id.Equals(feed.Id)) != null) return;
+            if (default(Guid).Equals(feedId)) return;
+            if (!FeedIds.FirstOrDefault(fid => fid.Equals(feedId)).Equals(default(Guid))) return;
 
-            feed.Publisher = this;
-            Feeds.Add(feed);
+            FeedIds.Add(feedId);
+        }
+    }
+
+    public class PublisherComparer : IEqualityComparer<Publisher>
+    {
+        public bool Equals(Publisher publisher1, Publisher publisher2)
+        {
+            return publisher1.Id.Equals(publisher2.Id);
+        }
+
+        public int GetHashCode(Publisher publisher)
+        {
+            return publisher.Id.GetHashCode();
         }
     }
 }

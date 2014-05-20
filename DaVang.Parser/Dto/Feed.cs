@@ -28,7 +28,7 @@ namespace Davang.Parser.Dto
             if (item == null) return;
             if (Items.Select(i => i.Id).Contains(item.Id)) return;
 
-            item.Feed = this;
+            item.FeedId = this.Id;
             Items.Add(item);
         }
     }
