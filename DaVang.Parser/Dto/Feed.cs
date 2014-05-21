@@ -21,6 +21,8 @@ namespace Davang.Parser.Dto
         public string Link { get; set; }
         public bool Subscribed { get; set; }
 
+        public bool Reading { get; set; }
+
         public IList<Item> Items { get; set; }
 
         public void AddItem(Item item)
