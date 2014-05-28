@@ -59,5 +59,10 @@ namespace Davang.Utilities.Extensions
 
             return selectedEntry;
         }
+
+        public static int GetMaxPageNumber<T>(this IEnumerable<T> items, int itemsPerPage)
+        {
+            return items.Count() / itemsPerPage + 1;
+        }
     }
 }
