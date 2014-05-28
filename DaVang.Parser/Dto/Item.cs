@@ -11,7 +11,7 @@ namespace Davang.Parser.Dto
         //public Feed Feed { get; set; }
         public Guid FeedId { get; set; }
         public bool Read { get; set; }
-        public bool Reading { get; set; }
+        //public bool Reading { get; set; }
 
         #region Syndication
 
