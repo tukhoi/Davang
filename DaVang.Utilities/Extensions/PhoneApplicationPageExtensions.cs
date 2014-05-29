@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Davang.Utilities.Extensions
 {
@@ -33,6 +35,13 @@ namespace Davang.Utilities.Extensions
         public static void BackToPreviousPage(this PhoneApplicationPage page)
         {
             page.NavigationService.GoBack();
+        }
+
+        public static void SetBackground(this PhoneApplicationPage page, Uri backgroundImageUri)
+        {
+            var background = new ImageBrush();
+            background.ImageSource = new BitmapImage(backgroundImageUri);
+            page.Background = background;
         }
     }
 }
