@@ -19,7 +19,7 @@ namespace Davang.Parser.Dto
         public string Description { get; set; }
         public DateTime LastUpdatedTime { get; set; }
         public string Link { get; set; }
-        public bool Subscribed { get; set; }
+        //public bool Subscribed { get; set; }
 
         public bool Reading { get; set; }
 
