@@ -13,6 +13,7 @@ namespace Davang.Parser.Dto
         //public IList<Feed> Feeds { get; set; }
         public IList<Guid> FeedIds { get; set; }
         public Uri ImageUri { get; set; }
+        public int Order { get; set; }
 
         public Publisher()
         {
