@@ -5,12 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
+using System.Windows.Media;
 
 namespace Davang.Utilities.Control
 {
     public class Messenger
     {
-        public static void Initialize(string title, Uri toastImageUri)
+        public static void Initialize(string title, Uri toastImageUri, Uri backgroundImageUri =  null, Brush foregroundColor = null)
         {
             _title = title;
             _toastImageUri = toastImageUri;
@@ -21,6 +22,14 @@ namespace Davang.Utilities.Control
             _toast.ImageSource = new BitmapImage(_toastImageUri);
             _toast.TextWrapping = System.Windows.TextWrapping.Wrap;
             _toast.Completed += toast_Completed;
+            if (backgroundImageUri != null)
+            {
+                var backgroundImage = new ImageBrush();
+                backgroundImage.ImageSource = new BitmapImage(backgroundImageUri);
+                _toast.Background = backgroundImage;
+            }
+            if (foregroundColor != null)
+                _toast.Foreground = foregroundColor;
         }
 
         private static string _title;

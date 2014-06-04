@@ -20,9 +20,10 @@ namespace Davang.Parser.Dto
         public DateTime LastUpdatedTime { get; set; }
         public string Link { get; set; }
         public int Order { get; set; }
-        //public bool Subscribed { get; set; }
+        public bool Enabled { get; set; }
+        public bool Default { get; set; }
 
-        public bool Reading { get; set; }
+        //public bool Reading { get; set; }
 
         public IList<Item> Items { get; set; }
 
@@ -33,6 +34,25 @@ namespace Davang.Parser.Dto
 
             item.FeedId = this.Id;
             Items.Add(item);
+        }
+
+        public Feed Clone()
+        {
+            var feed = new Feed()
+            {
+                Id = this.Id,
+                Name = this.Name,
+                Publisher = this.Publisher.Clone(),
+                Title = this.Title,
+                Description = this.Description,
+                LastUpdatedTime = this.LastUpdatedTime,
+                Link = this.Link,
+                Order = this.Order,
+                Enabled = this.Enabled,
+                Default = this.Default,
+            };
+
+            return feed;
         }
     }
 }

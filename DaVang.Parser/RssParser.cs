@@ -12,6 +12,7 @@ using Davang.Utilities.Tasks;
 using Davang.Utilities;
 using System.Xml.Linq;
 using Davang.Utilities.Helpers;
+using System.Net;
 
 namespace Davang.Parser
 {

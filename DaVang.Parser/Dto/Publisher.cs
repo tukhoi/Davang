@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Davang.Utilities.Extensions;
 
 namespace Davang.Parser.Dto
 {
@@ -10,10 +11,11 @@ namespace Davang.Parser.Dto
     {
         public string Name { get; set; }
         public string Link { get; set; }
-        //public IList<Feed> Feeds { get; set; }
         public IList<Guid> FeedIds { get; set; }
         public Uri ImageUri { get; set; }
         public int Order { get; set; }
+        public bool Enabled { get; set; }
+        public bool Default { get; set; }
 
         public Publisher()
         {
@@ -26,6 +28,24 @@ namespace Davang.Parser.Dto
             if (!FeedIds.FirstOrDefault(fid => fid.Equals(feedId)).Equals(default(Guid))) return;
 
             FeedIds.Add(feedId);
+        }
+
+        public Publisher Clone()
+        {
+            var publisher = new Publisher()
+            {
+                Id = this.Id,
+                Name = this.Name,
+                Link = this.Link,
+                ImageUri = this.ImageUri,
+                Order = this.Order,
+                Enabled = this.Enabled,
+                Default = this.Default,
+            };
+
+            this.FeedIds.ForEach(fid => publisher.FeedIds.Add(fid));
+
+            return publisher;
         }
     }
 

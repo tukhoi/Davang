@@ -90,6 +90,7 @@
     <Compile Include="Extensions\PhoneApplicationPageExtensions.cs" />
     <Compile Include="Extensions\QueryStringExtensions.cs" />
     <Compile Include="Extensions\WebClientExtensions.cs" />
+    <Compile Include="Helpers\LicenseHelper.cs" />
     <Compile Include="Helpers\Serialization\BinaryFormatterHelper.cs" />
     <Compile Include="Helpers\Serialization\ISerializationHelper.cs" />
     <Compile Include="Helpers\Serialization\JsonSerializationHelper.cs" />
@@ -119,6 +120,12 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MockIAPLib\MockIAPLib.csproj">
+      <Project>{015E3DFE-EB56-429F-95EF-BAB5D41B23BE}</Project>
+      <Name>MockIAPLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
