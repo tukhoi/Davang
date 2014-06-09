@@ -9,6 +9,6 @@ namespace Davang.Parser
 {
     public interface IParser
     {
-        Task<Feed> GetFeed(string keyword);
+        Task<Feed> GetFeedAsync(string keyword);
     }
 }

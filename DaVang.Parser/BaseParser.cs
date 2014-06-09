@@ -30,7 +30,7 @@ namespace Davang.Parser
 
         #region Public methods
 
-        public virtual async Task<Feed> GetFeed(string keyword)
+        public virtual async Task<Feed> GetFeedAsync(string keyword)
         {
             Feed feedResult = null;
             var feedUrl = "";

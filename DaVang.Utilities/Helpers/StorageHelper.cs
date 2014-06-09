@@ -68,7 +68,7 @@ namespace Davang.Utilities.Helpers
         public static Stream GetFileStream(string filePath)
         {
             if (IsolatedStorageFile.GetUserStoreForApplication().FileExists(filePath))
-                return IsolatedStorageFile.GetUserStoreForApplication().OpenFile(filePath, FileMode.Open, FileAccess.Read);
+                return IsolatedStorageFile.GetUserStoreForApplication().OpenFile(filePath, FileMode.Open, FileAccess.ReadWrite);
 
             return null;
         }
