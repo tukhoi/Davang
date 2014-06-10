@@ -8,31 +8,31 @@ using System.Windows;
 
 namespace Davang.Utilities.Helpers
 {
-    //public static class WebBrowserHelper
-    //{
-    //    public static readonly DependencyProperty HtmlProperty = DependencyProperty.RegisterAttached(
-    //        "Html", typeof(string), typeof(WebBrowserHelper), new PropertyMetadata(OnHtmlChanged));
+    public static class WebBrowserHelper
+    {
+        public static readonly DependencyProperty HtmlProperty = DependencyProperty.RegisterAttached(
+            "Html", typeof(string), typeof(WebBrowserHelper), new PropertyMetadata(OnHtmlChanged));
 
-    //    public static string GetHtml(DependencyObject dependencyObject)
-    //    {
-    //        return (string)dependencyObject.GetValue(HtmlProperty);
-    //    }
+        public static string GetHtml(DependencyObject dependencyObject)
+        {
+            return (string)dependencyObject.GetValue(HtmlProperty);
+        }
 
-    //    public static void SetHtml(DependencyObject dependencyObject, string value)
-    //    {
-    //        dependencyObject.SetValue(HtmlProperty, value);
-    //    }
+        public static void SetHtml(DependencyObject dependencyObject, string value)
+        {
+            dependencyObject.SetValue(HtmlProperty, value);
+        }
 
-    //    private static void OnHtmlChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-    //    {
-    //        var browser = d as WebBrowser;
+        private static void OnHtmlChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var browser = d as WebBrowser;
 
-    //        if (browser == null)
-    //            return;
+            if (browser == null)
+                return;
 
-    //        var html = e.NewValue.ToString();
+            var html = e.NewValue.ToString();
 
-    //        browser.NavigateToString(html);
-    //    }
-    //}
+            browser.NavigateToString(html);
+        }
+    }
 }
