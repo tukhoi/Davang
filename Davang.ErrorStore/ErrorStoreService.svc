@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Davang.ErrorStore.ErrorStoreService" CodeBehind="ErrorStoreService.svc.cs" Factory="System.ServiceModel.Activation.WebServiceHostFactory" %>

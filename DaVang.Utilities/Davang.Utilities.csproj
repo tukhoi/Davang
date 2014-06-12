@@ -85,6 +85,9 @@
   <ItemGroup>
     <Compile Include="ApplicationServices\BaseResult.cs" />
     <Compile Include="Control\Messenger.cs" />
+    <Compile Include="ErrorHandler\ErrorHandler.cs" />
+    <Compile Include="ErrorHandler\ErrorLogged.cs" />
+    <Compile Include="ErrorHandler\IErrorHandler.cs" />
     <Compile Include="Extensions\EAPCommon.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\PhoneApplicationPageExtensions.cs" />
