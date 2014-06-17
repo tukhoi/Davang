@@ -10,7 +10,6 @@ namespace Davang.Parser.Dto
     {
         public Guid FeedId { get; set; }
         public bool Read { get; set; }
-        public bool Reading { get; set; }
 
         #region Syndication
 
