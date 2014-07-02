@@ -52,9 +52,9 @@ namespace Davang.Utilities.Helpers
             {
                 storageFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appdata:///local/" + fileName));
             }
-            catch (FileNotFoundException)
+            catch (FileNotFoundException ex)
             {
-                storageFile = null;
+                throw ex;
             }
 
             return storageFile;
@@ -65,18 +65,17 @@ namespace Davang.Utilities.Helpers
             return IsolatedStorageFile.GetUserStoreForApplication().FileExists(filePath);
         }
 
-        public static Stream GetFileStream(string filePath)
+        public static string[] GetLocalFilesStartWith(string pattern)
         {
-            return GetFileStream(filePath, FileMode.Open);
-
+            return IsolatedStorageFile.GetUserStoreForApplication().GetFileNames(pattern + "*");
         }
 
-        public static Stream GetFileStream(string filePath, FileMode mode)
+        public static Stream GetFileStream(string filePath)
         {
             if (IsolatedStorageFile.GetUserStoreForApplication().FileExists(filePath))
-                return IsolatedStorageFile.GetUserStoreForApplication().OpenFile(filePath, mode, FileAccess.ReadWrite);
-
-            return null;
+                return IsolatedStorageFile.GetUserStoreForApplication().OpenFile(filePath, FileMode.Truncate, FileAccess.ReadWrite);
+            else
+                return IsolatedStorageFile.GetUserStoreForApplication().OpenFile(filePath, FileMode.CreateNew, FileAccess.ReadWrite);
         }
 
         /// <summary>
@@ -95,9 +94,9 @@ namespace Davang.Utilities.Helpers
 
                 await storageFile.DeleteAsync();
             }
-            catch (FileNotFoundException)
+            catch (FileNotFoundException ex)
             {
-                return;
+                throw ex;
             }
         }
 
@@ -128,7 +127,7 @@ namespace Davang.Utilities.Helpers
             }
             catch (Exception ex)
             {
-                return false;
+                throw ex;
             }
         }
 
@@ -146,11 +145,11 @@ namespace Davang.Utilities.Helpers
             }
             catch (Exception ex)
             {
-                return false;
+                throw ex;
             }
         }
 
-        public static async Task<bool> MoveFile(string sourceFile, string destinationFile)
+        public static bool MoveFile(string sourceFile, string destinationFile)
         {
             try
             {
@@ -165,14 +164,15 @@ namespace Davang.Utilities.Helpers
             }
             catch (Exception ex)
             {
-                return false;
+                throw ex;
             }
         }
 
         public static void SaveConfig(string key, object value)
         {
             IsolatedStorageSettings isolatedStore = IsolatedStorageSettings.ApplicationSettings;
-            isolatedStore.Remove(key);
+            if (isolatedStore.Contains(key))
+                isolatedStore.Remove(key);
             isolatedStore.Add(key, value);
             isolatedStore.Save();
         }
@@ -191,6 +191,11 @@ namespace Davang.Utilities.Helpers
                 return false;
             }
             return true;
+        }
+
+        public static bool EnoughSpace(int mbToStore = 1)
+        {
+            return IsolatedStorageFile.GetUserStoreForApplication().AvailableFreeSpace / 1000000 > mbToStore;
         }
     }
 }

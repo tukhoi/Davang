@@ -25,5 +25,16 @@ namespace Davang.Utilities.Extensions
             }
             return default(Guid);
         }
+
+        public static bool? GetQueryStringToBool(this IDictionary<string, string> queryString, string key)
+        {
+            if (queryString.Keys.Contains(key))
+            {
+                bool value;
+                if (bool.TryParse(queryString[key], out value))
+                    return value;
+            }
+            return null;
+        }
     }
 }

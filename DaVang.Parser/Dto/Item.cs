@@ -13,7 +13,6 @@ namespace Davang.Parser.Dto
 
         #region Syndication
 
-        public string Authors { get; set; }
         public DateTime PublishDate { get; set; }
         public string Title { get; set; }
         public string Summary { get; set; }

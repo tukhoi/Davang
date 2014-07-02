@@ -17,14 +17,21 @@ namespace Davang.Utilities.Helpers.Serialization
             try
             {
                 var map = reader.ReadToEnd();
-                T graph = JsonConvert.DeserializeObject<T>(map);
+                T graph = JsonConvert.DeserializeObject<T>(map, 
+                    new JsonSerializerSettings()
+                    {
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                        NullValueHandling = NullValueHandling.Ignore,
+                        DefaultValueHandling = DefaultValueHandling.Ignore
+                    });
                 return graph;
             }
             catch (Exception ex)
             {
-                return default(T);
+                throw ex;
             }
-            finally {
+            finally
+            {
                 reader.Close();
             }
         }
@@ -38,15 +45,21 @@ namespace Davang.Utilities.Helpers.Serialization
 
             try
             {
-                var map = JsonConvert.SerializeObject(graph, Formatting.Indented, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Serialize});
+                var map = JsonConvert.SerializeObject(graph, Formatting.None, 
+                    new JsonSerializerSettings() { 
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                        NullValueHandling = NullValueHandling.Ignore,
+                        DefaultValueHandling = DefaultValueHandling.Ignore
+                    });
                 writer.Write(map);
                 return true;
             }
             catch (Exception ex)
             {
-                return false;
+                throw ex;
             }
-            finally {
+            finally
+            {
                 writer.Close();
             }
         }

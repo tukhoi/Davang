@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ namespace Davang.Parser.Dto
         public Feed()
         {
             Items = new List<Item>();
+            Publisher = new Publisher();
         }
 
         public string Name { get; set; }
@@ -20,20 +22,26 @@ namespace Davang.Parser.Dto
         public DateTime LastUpdatedTime { get; set; }
         public string Link { get; set; }
         public int Order { get; set; }
+        [JsonIgnore]
         public bool Enabled { get; set; }
+        [JsonIgnore]
         public bool Default { get; set; }
-
-        //public bool Reading { get; set; }
 
         public IList<Item> Items { get; set; }
 
-        public void AddItem(Item item)
+        public bool AddItem(Item item)
         {
-            if (item == null) return;
-            if (Items.Select(i => i.Id).Contains(item.Id)) return;
+            if (item == null
+                || string.IsNullOrEmpty(item.Id)
+                || string.IsNullOrEmpty(item.Title)
+                || string.IsNullOrEmpty(item.Link)) 
+                return false;
+
+            if (Items.Select(i => i.Id).Contains(item.Id)) return false;
 
             item.FeedId = this.Id;
-            Items.Add(item);
+            Items.Insert(0, item);
+            return true;
         }
 
         public Feed Clone()

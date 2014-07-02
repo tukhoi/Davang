@@ -73,10 +73,10 @@ namespace Davang.Parser
 
                 return feed;
             }
-            catch (Exception)
-            { }
-
-            return null;
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         private Item CreateFeedItem(XElement xElement, XNamespace xmlns)
@@ -88,6 +88,8 @@ namespace Davang.Parser
                 var clickUrl = xElement.Element(xmlns + "link") != null ? xElement.Element(xmlns + "link").Value : string.Empty;
                 var id = xElement.Element(xmlns + "guid") != null ? xElement.Element(xmlns + "guid").Value : string.Empty;
                 var pubDate = xElement.Element(xmlns + "pubDate") != null ? xElement.Element(xmlns + "pubDate").Value : string.Empty;
+                if (string.IsNullOrEmpty(pubDate))
+                    pubDate = xElement.Element(xmlns + "pubdate") != null ? xElement.Element(xmlns + "pubdate").Value : string.Empty;
 
                 var item = new Item
                 {
@@ -103,10 +105,10 @@ namespace Davang.Parser
 
                 return item;
             }
-            catch (Exception)
-            { }
-
-            return null;
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         #endregion

@@ -58,7 +58,7 @@ namespace Davang.Parser
 
         #region Internals methods
 
-        internal virtual string GetFeedUrl(string keyword)
+        protected virtual string GetFeedUrl(string keyword)
         {
             return string.Format(BaseUrl, keyword);
         }

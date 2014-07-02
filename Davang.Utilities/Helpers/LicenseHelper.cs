@@ -41,8 +41,10 @@ namespace Davang.Utilities.Helpers
                     CurrentApp.ReportProductFulfillment(productId);
                 }
             }
-            catch (Exception)
-            { }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

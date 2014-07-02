@@ -30,7 +30,6 @@ namespace Davang.Utilities.Helpers.Serialization
             {
                 if (stream != null)
                     stream.Close();
-
             }
             return cache;
         }
@@ -73,7 +72,6 @@ namespace Davang.Utilities.Helpers.Serialization
             {
                 if (stream != null)
                     stream.Close();
-
             }
             return cache;
         }
@@ -105,17 +103,6 @@ namespace Davang.Utilities.Helpers.Serialization
 
         protected abstract T DoDeserialize<T>(Stream fs);
         protected abstract bool DoSerialize(Stream fs, object graph);
-
-
-        //protected virtual T DoDeserialize<T>(Stream fs)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //protected virtual bool DoSerialize(Stream stream, object graph)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
         #endregion
     }

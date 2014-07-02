@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Davang.Utilities.Extensions;
+using Newtonsoft.Json;
 
 namespace Davang.Parser.Dto
 {
@@ -14,7 +15,9 @@ namespace Davang.Parser.Dto
         public IList<Guid> FeedIds { get; set; }
         public Uri ImageUri { get; set; }
         public int Order { get; set; }
+        [JsonIgnore]
         public bool Enabled { get; set; }
+        [JsonIgnore]
         public bool Default { get; set; }
 
         public Publisher()
