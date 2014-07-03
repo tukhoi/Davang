@@ -50,8 +50,8 @@ namespace Davang.WP.Utilities
         {
             while (NavigationService.CanGoBack && NavigationService.BackStack.Count() > 1)
                 NavigationService.RemoveBackEntry();
-
-            NavigationService.GoBack();
+            if (NavigationService.CanGoBack)
+                NavigationService.GoBack();
         }
 
         protected void BackToPreviousPage(short skip = 0)
