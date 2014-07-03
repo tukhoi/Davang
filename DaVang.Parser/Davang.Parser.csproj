@@ -84,7 +84,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BaseParser.cs" />
-    <Compile Include="Dto\BaseEntity.cs" />
     <Compile Include="Dto\Feed.cs" />
     <Compile Include="Dto\Item.cs" />
     <Compile Include="Dto\Publisher.cs" />

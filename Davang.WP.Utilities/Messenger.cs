@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace Davang.WP.Utilities
+namespace DocBao.WP.Helper
 {
     public class Messenger
     {
-        public static void Initialize(string title, string toastImageUri, string backgroundImageUri = null, Brush foregroundColor = null)
+        public static void Initialize(string title, Uri toastImageUri, Uri backgroundImageUri = null, Brush foregroundColor = null)
         {
             _title = title;
-            _toastImageUri = new Uri(toastImageUri, UriKind.Relative);
+            _toastImageUri = toastImageUri;
 
             _toast = new ToastPrompt();
             _toast.FontSize = 20;
@@ -25,7 +25,7 @@ namespace Davang.WP.Utilities
             if (backgroundImageUri != null)
             {
                 var backgroundImage = new ImageBrush();
-                backgroundImage.ImageSource = new BitmapImage(new Uri(backgroundImageUri, UriKind.Relative));
+                backgroundImage.ImageSource = new BitmapImage(backgroundImageUri);
                 _toast.Background = backgroundImage;
             }
             if (foregroundColor != null)
@@ -37,13 +37,14 @@ namespace Davang.WP.Utilities
         private static Action _completedAction;
         private static ToastPrompt _toast;
 
-        public static void ShowToast(string message, string title = "", Action completedAction = null)
+        public static void ShowToast(string message, string title = "", Action completedAction = null, int miliSecondsUntilHidden = 4000)
         {
             if (completedAction != null)
                 _completedAction = completedAction;
 
             _toast.Title = string.IsNullOrEmpty(title) ? _title : title;
             _toast.Message = message;
+            _toast.MillisecondsUntilHidden = miliSecondsUntilHidden;
             _toast.Show();
         }
 

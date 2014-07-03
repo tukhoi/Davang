@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Davang.WP.Utilities
+namespace Davang.WP.Utilities.Helper
 {
     public static class WebBrowserHelper
     {

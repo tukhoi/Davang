@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Davang.Utilities.Extensions;
 using Newtonsoft.Json;
+using Davang.Utilities.ApplicationServices;
 
 namespace Davang.Parser.Dto
 {

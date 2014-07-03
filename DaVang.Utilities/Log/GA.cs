@@ -37,12 +37,25 @@ namespace Davang.Utilities.Log
                 return;
 
             var message = new StringBuilder();
-            message.Append("*****ClientId: " + _clientId + "*****");
+            message.Append("*****ClientId: ");
+            message.AppendLine(_clientId);
+            message.AppendLine("*****");
+
             if (!string.IsNullOrEmpty(addtionalMessage))
-                message.AppendLine("*****" + addtionalMessage + "*****");
-            message.AppendLine("*****Message: " + exception.Message + "*****");
-            message.AppendLine("*****Source: " + exception.Source + "*****");
-            message.AppendLine("*****Stack trace: " + exception.StackTrace + "*****");
+            {
+                message.AppendLine("*****");
+                message.AppendLine(addtionalMessage);
+                message.AppendLine("*****");
+            }
+
+            message.AppendLine(CreateExceptionData(exception));
+
+            if (exception.InnerException != null)
+            {
+                message.AppendLine("***Inner***");
+                message.AppendLine(CreateExceptionData(exception.InnerException));
+                message.AppendLine("***");
+            }
 
             _tracker.SendException(message.ToString(), fatal);
         }
@@ -66,6 +79,23 @@ namespace Davang.Utilities.Log
             if (_tracker == null)
                 return;
             _tracker.SendEvent(_clientId + " - AdsClicked", adsControl, null, 0);
+        }
+
+        private static string CreateExceptionData(Exception exception)
+        {
+            var data = new StringBuilder();
+
+            data.AppendLine("*****Message: ");
+            data.AppendLine(exception.Message);
+            data.AppendLine("*****");
+            data.AppendLine("*****Source: ");
+            data.AppendLine(exception.Source);
+            data.AppendLine("*****");
+            data.AppendLine("*****Stack trace: ");
+            data.AppendLine(exception.StackTrace);
+            data.AppendLine("*****");
+
+            return data.ToString();
         }
     }
 }

@@ -1,11 +1,14 @@
-﻿using Microsoft.Phone.Controls;
+﻿using Davang.Utilities.Log;
+using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -13,15 +16,13 @@ namespace Davang.WP.Utilities
 {
     public class BasePage : PhoneApplicationPage
     {
-        static string _backgroundImage = "/Resources/Images/background.png";
-        static string _layoutRoot = "LayoutRoot";
-        static string _mainPage = "MainPage.xaml";
+        static string BackgroundImageUri = "/Images/background.png";
+        static string LayoutRoot = "LayoutRoot";
 
-        public static void Initialize(string backgroundImage = "/Resources/Images/background.png", string layoutRoot = "LayoutRoot", string mainPage = "MainPage.xaml")
+        public static void Initialize(string backgroundImageUri, string layoutRoot)
         {
-            _backgroundImage = backgroundImage;
-            _layoutRoot = layoutRoot;
-            _mainPage = mainPage;
+            BackgroundImageUri = backgroundImageUri;
+            LayoutRoot = layoutRoot;
         }
 
         public BasePage()
@@ -47,7 +48,10 @@ namespace Davang.WP.Utilities
 
         protected void BackToMainPage()
         {
-            NavigationService.Navigate(new Uri(_mainPage, UriKind.Relative));
+            while (NavigationService.CanGoBack && NavigationService.BackStack.Count() > 1)
+                NavigationService.RemoveBackEntry();
+
+            NavigationService.GoBack();
         }
 
         protected void BackToPreviousPage(short skip = 0)
@@ -72,9 +76,14 @@ namespace Davang.WP.Utilities
                 NavigationService.RemoveBackEntry();
         }
 
+        protected bool IsMainPage()
+        {
+            return NavigationService.BackStack.Count() == 0;
+        }
+
         protected void SetBackground()
         {
-            SetBackground(_layoutRoot);
+            SetBackground(LayoutRoot);
         }
 
         protected void SetBackground(string rootControlName = "")
@@ -84,19 +93,19 @@ namespace Davang.WP.Utilities
             if (grid != null)
             {
                 var background = new ImageBrush();
-                background.ImageSource = new BitmapImage(new Uri(_backgroundImage, UriKind.Relative));
+                background.ImageSource = new BitmapImage(new Uri(BackgroundImageUri, UriKind.Relative));
                 grid.Background = background;
             }
         }
 
         protected void LogPage()
         {
-            GoogleAnalytics.EasyTracker.GetTracker().SendView(this.ToString());
+            GA.LogPage(this.ToString());
         }
 
-        protected void LogAdsClicked()
+        protected void LogAdsClicked(string adsControlName)
         {
-            GoogleAnalytics.EasyTracker.GetTracker().SendEvent(this.ToString(), "Ads clicked", null, 0);
+            GA.LogAdsClicked(this.ToString(), adsControlName);
         }
     }
 }

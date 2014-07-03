@@ -13,7 +13,7 @@ namespace Davang.Utilities.Tasks
         public static async Task<string> GetRawResult(string requestUri)
         {
             var client = new WebClient();
-            client.Headers["UserAgent"] = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)";
+            client.Headers["UserAgent"] = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36";
             return await client.DownloadStringTaskAsync(new Uri(requestUri));
         }
     }
