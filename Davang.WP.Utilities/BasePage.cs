@@ -36,7 +36,7 @@ namespace Davang.WP.Utilities
             LogPage();
         }
 
-        protected void SetProgressIndicator(bool isVisible, string message = "")
+        protected void SetProgressIndicator(bool isVisible = true, string message = "")
         {
             if (SystemTray.ProgressIndicator == null)
                 SystemTray.ProgressIndicator = new ProgressIndicator();
