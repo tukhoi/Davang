@@ -16,13 +16,15 @@ namespace Davang.WP.Utilities
 {
     public class BasePage : PhoneApplicationPage
     {
-        static string BackgroundImageUri = "/Images/background.png";
-        static string LayoutRoot = "LayoutRoot";
+        static string BackgroundImageUri;
+        static string LayoutRoot;
+        static string MainPage;
 
-        public static void Initialize(string backgroundImageUri, string layoutRoot)
+        public static void Initialize(string backgroundImageUri = "/Images/background.png", string layoutRoot = "LayoutRoot", string mainPage = "MainPage")
         {
             BackgroundImageUri = backgroundImageUri;
             LayoutRoot = layoutRoot;
+            MainPage = mainPage;
         }
 
         public BasePage()
@@ -48,10 +50,8 @@ namespace Davang.WP.Utilities
 
         protected void BackToMainPage()
         {
-            while (NavigationService.CanGoBack && NavigationService.BackStack.Count() > 1)
-                NavigationService.RemoveBackEntry();
-            if (NavigationService.CanGoBack)
-                NavigationService.GoBack();
+            EmptyBackStack();
+            NavigationService.Navigate(new Uri(MainPage, UriKind.Relative));
         }
 
         protected void BackToPreviousPage(short skip = 0)
@@ -70,8 +70,18 @@ namespace Davang.WP.Utilities
                 NavigationService.RemoveBackEntry();
         }
 
+        protected void EmptyBackStack()
+        {
+            while (NavigationService.BackStack.Count() > 0)
+                NavigationService.RemoveBackEntry();
+        }
+
         protected void SetMainPage()
         {
+            var thisPage = this.ToString().Split('.');
+            if (thisPage.Length > 0)
+                MainPage = string.Format("/{0}.xaml", thisPage[thisPage.Length - 1]);
+
             while (NavigationService.CanGoBack)
                 NavigationService.RemoveBackEntry();
         }
