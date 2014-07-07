@@ -81,6 +81,18 @@ namespace Davang.Utilities.Log
             _tracker.SendEvent(_clientId + " - AdsClicked", adsControl, null, 0);
         }
 
+        public static void LogStartSession()
+        {
+            if (_tracker == null) return;
+            _tracker.SendEvent(_clientId + " - Start", "start on " + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss tt"), null, 0);
+        }
+
+        public static void LogEndSession()
+        {
+            if (_tracker == null) return;
+            _tracker.SendEvent(_clientId + " - Stop", "stop on " + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss tt"), null, 0);
+        }
+
         private static string CreateExceptionData(Exception exception)
         {
             var data = new StringBuilder();
