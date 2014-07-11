@@ -48,12 +48,16 @@ namespace Davang.Utilities
 
                 double current = 0;
                 double rate = 0;
+                double rateMb = 0;
                 lock (lockObj)
                 {
                     current = DeviceStatus.ApplicationCurrentMemoryUsage / 1000000;
                     rate = 0;
                     if (_last != 0)
-                        rate = ((current - _last) / current) * 100;
+                    {
+                        rateMb = current - _last;
+                        rate = (rateMb / current) * 100;
+                    }
 
                     _last = current;
                 }
@@ -63,7 +67,7 @@ namespace Davang.Utilities
 
                 report += Environment.NewLine +
                     "Current: " + current.ToString() + "MB\n" +
-                    "Increased: " + rate.ToString() + "%\n" +
+                    "Increased: " + rateMb.ToString() + "MB (" + rate + "%)\n" +
                     "Available: " + available.ToString() + "MB\n" + 
                     "Peak: " + (DeviceStatus.ApplicationPeakMemoryUsage / 1000000).ToString() + "MB\n" +
                     "Memory Limit: " + limit.ToString() + "MB\n" +
