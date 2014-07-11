@@ -30,13 +30,13 @@ namespace Davang.Parser
 
         #region Public methods
 
-        public virtual async Task<Feed> GetFeedAsync(string keyword)
+        public virtual async Task<Feed> GetFeedAsync(string keyword = "")
         {
             Feed feedResult = null;
             var feedUrl = "";
             try
             {
-                feedUrl = GetFeedUrl(keyword);
+                feedUrl = string.IsNullOrEmpty(keyword) ? BaseUrl : GetFeedUrl(keyword);
                 var responseData = await GetRawResult(feedUrl);
                 if (!string.IsNullOrEmpty(responseData.Trim()))
                     feedResult = ParseFeed(responseData);

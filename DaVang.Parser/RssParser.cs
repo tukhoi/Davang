@@ -30,16 +30,19 @@ namespace Davang.Parser
         protected internal override Feed ParseFeed(string data)
         {
             Feed feed = null;
-            XmlFormater.Format(ref data);
+            //XmlFormater.Format(ref data);
             var xmlDoc = XDocument.Parse(data);
             if (xmlDoc.Root != null)
             {
                 var xmlns = xmlDoc.Root.GetDefaultNamespace();
-                var channelElement = xmlDoc.Root.Element(xmlns + "channel");
-                if (channelElement != null)
-                    feed = CreateFeed(channelElement, xmlns);
-                else
-                    feed = new Feed();
+                //var channelElement = xmlDoc.Root.Element(xmlns + "channel");
+                //if (channelElement != null)
+                //    feed = CreateFeed(channelElement, xmlns);
+                //else
+                //    feed = new Feed();
+
+                feed = new Feed();
+
                 if (feed != null)
                     xmlDoc.Root.Descendants(xmlns + "item").ToList().ForEach(element => feed.AddItem(CreateFeedItem(element, xmlns)));
             }
@@ -86,17 +89,28 @@ namespace Davang.Parser
                 var title = xElement.Element(xmlns + "title") != null ? xElement.Element(xmlns + "title").Value : string.Empty;
                 var description = xElement.Element(xmlns + "description") != null ? xElement.Element(xmlns + "description").Value : string.Empty;
                 var clickUrl = xElement.Element(xmlns + "link") != null ? xElement.Element(xmlns + "link").Value : string.Empty;
-                var id = xElement.Element(xmlns + "guid") != null ? xElement.Element(xmlns + "guid").Value : string.Empty;
                 var pubDate = xElement.Element(xmlns + "pubDate") != null ? xElement.Element(xmlns + "pubDate").Value : string.Empty;
                 if (string.IsNullOrEmpty(pubDate))
                     pubDate = xElement.Element(xmlns + "pubdate") != null ? xElement.Element(xmlns + "pubdate").Value : string.Empty;
+
+                string id = string.Empty;
+                var guidElement = xElement.Element(xmlns + "guid");
+                if (guidElement != null)
+                {
+                    var isPermanent = guidElement.Attribute(xmlns + "isPermaLink") != null ? guidElement.Attribute(xmlns + "isPermaLink").Value : "true";
+                    if (isPermanent.ToLower().Equals("true"))
+                        id = xElement.Element(xmlns + "guid") != null ? xElement.Element(xmlns + "guid").Value : string.Empty;
+                    
+                    id = string.IsNullOrEmpty(id) || default(Guid).ToString().Equals(id.Trim()) ? clickUrl.Trim() : id.Trim();
+                }
+
 
                 var item = new Item
                 {
                     Title = title.Trim(),
                     Summary = description.Trim(),
                     Link = clickUrl.Trim(),
-                    Id = string.IsNullOrEmpty(id) || default(Guid).ToString().Equals(id.Trim()) ? clickUrl.Trim() : id.Trim()
+                    Id = id
                 };
                 DateTime dtPubDate;
                 if (DateTime.TryParse(pubDate.Trim(), out dtPubDate))

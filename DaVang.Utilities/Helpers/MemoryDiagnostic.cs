@@ -58,12 +58,15 @@ namespace Davang.Utilities
                     _last = current;
                 }
 
+                var limit = DeviceStatus.ApplicationMemoryUsageLimit / 1000000;
+                var available = limit - current;
 
                 report += Environment.NewLine +
                     "Current: " + current.ToString() + "MB\n" +
                     "Increased: " + rate.ToString() + "%\n" +
+                    "Available: " + available.ToString() + "MB\n" + 
                     "Peak: " + (DeviceStatus.ApplicationPeakMemoryUsage / 1000000).ToString() + "MB\n" +
-                    "Memory Limit: " + (DeviceStatus.ApplicationMemoryUsageLimit / 1000000).ToString() + "MB\n" +
+                    "Memory Limit: " + limit.ToString() + "MB\n" +
                     "Working Limit: " + Convert.ToInt32((Convert.ToDouble(DeviceExtendedProperties.GetValue("ApplicationWorkingSetLimit")) / 1000000)).ToString() + "MB";
 
                 Deployment.Current.Dispatcher.BeginInvoke(delegate
