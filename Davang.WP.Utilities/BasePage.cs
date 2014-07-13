@@ -36,6 +36,7 @@ namespace Davang.WP.Utilities
         {
             SetBackground();
             LogPage();
+            //this.Loaded -= BasePage_Loaded;
         }
 
         protected void SetProgressIndicator(bool isVisible = true, string message = "")

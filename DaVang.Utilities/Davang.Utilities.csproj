@@ -85,6 +85,7 @@
   <ItemGroup>
     <Compile Include="ApplicationServices\BaseEntity.cs" />
     <Compile Include="ApplicationServices\BaseResult.cs" />
+    <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Extensions\EAPCommon.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\QueryStringExtensions.cs" />
@@ -99,7 +100,6 @@
     <Compile Include="Helpers\Serialization\SerializationHelperManager.cs" />
     <Compile Include="Helpers\Serialization\XmlSerializationHelper.cs" />
     <Compile Include="Helpers\StorageHelper.cs" />
-    <Compile Include="Helpers\XmlFormater.cs" />
     <Compile Include="Helpers\MemoryDiagnostic.cs" />
     <Compile Include="Log\PhoneNameResolver.cs" />
     <Compile Include="Log\PlatformProvider.cs" />

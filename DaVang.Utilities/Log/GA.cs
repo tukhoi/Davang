@@ -9,21 +9,32 @@ namespace Davang.Utilities.Log
 {
     public class GA
     {
-        private static Tracker _tracker;
         private static string _clientId;
+        private static string _gaId;
+        private static string _appName;
+        private static string _appVersion;
 
-        public static void Initialize(string appID, string gaID, string appName, string appVersion)
+        public static void Initialize(string clientID, string gaId, string appName, string appVersion)
         {
             try
             {
-                _clientId = appID;
-                _tracker = new Tracker(gaID, new PlatformInfoProvider(), GAServiceManager.Current);
-                _tracker.AppName = appName;
-                _tracker.AppVersion = appVersion;
+                _clientId = clientID;
+                _gaId = gaId;
+                _appName = appName;
+                _appVersion = appVersion;
             }
             catch (Exception)
             {
             }
+        }
+
+        private static Tracker GetTracker()
+        {
+            var tracker = new Tracker(_gaId, new PlatformInfoProvider(), GAServiceManager.Current);
+            tracker.AppName = _appName;
+            tracker.AppVersion = _appVersion;
+
+            return tracker;
         }
 
         public static void LogException(Exception exception, string addtionalMessage = "")
@@ -33,8 +44,7 @@ namespace Davang.Utilities.Log
 
         public static void LogException(Exception exception, bool fatal, string addtionalMessage = "")
         {
-            if (_tracker == null)
-                return;
+            var tracker = GetTracker();
 
             var message = new StringBuilder();
             message.Append("*****ClientId: ");
@@ -57,40 +67,37 @@ namespace Davang.Utilities.Log
                 message.AppendLine("***");
             }
 
-            _tracker.SendException(message.ToString(), fatal);
+            tracker.SendException(message.ToString(), fatal);
         }
 
         public static void LogBackgroundAgent(string message, long itemUpdated)
         {
-            if (_tracker == null)
-                return;
-            _tracker.SendEvent(_clientId + " - BackgroundAgent", message, null, itemUpdated);
+            var tracker = GetTracker();
+            tracker.SendEvent(_clientId + " - BackgroundAgent", message, null, itemUpdated);
         }
 
         public static void LogPage(string pageName)
         {
-            if (_tracker == null)
-                return;
-            _tracker.SendView(_clientId + " - " + pageName);
+            var tracker = GetTracker();
+            tracker.SendView(_clientId + " - " + pageName);
         }
 
         public static void LogAdsClicked(string pageName, string adsControl)
         {
-            if (_tracker == null)
-                return;
-            _tracker.SendEvent(_clientId + " - AdsClicked", adsControl, null, 0);
+            var tracker = GetTracker();
+            tracker.SendEvent(_clientId + " - AdsClicked", adsControl, null, 0);
         }
 
         public static void LogStartSession()
         {
-            if (_tracker == null) return;
-            _tracker.SendEvent(_clientId + " - Start", "start on " + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss tt"), null, 0);
+            var tracker = GetTracker();
+            tracker.SendEvent(_clientId + " - Start", "start on " + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss tt"), null, 0);
         }
 
         public static void LogEndSession()
         {
-            if (_tracker == null) return;
-            _tracker.SendEvent(_clientId + " - Stop", "stop on " + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss tt"), null, 0);
+            var tracker = GetTracker();
+            tracker.SendEvent(_clientId + " - Stop", "stop on " + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss tt"), null, 0);
         }
 
         private static string CreateExceptionData(Exception exception)

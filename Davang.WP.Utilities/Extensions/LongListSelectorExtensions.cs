@@ -15,7 +15,6 @@ namespace Davang.WP.Utilities.Extensions
         {
             try
             {
-
                 if (list.ItemsSource == null || list.ItemsSource.Count == 0 || scrollToId == null) return;
 
                 int i = 0;
