@@ -41,6 +41,8 @@ namespace DocBao.WP.Helper
             toast.Show();
             if (toastCompleted != null)
                 toast.Completed -= toastCompleted;
+
+            toast = null;
         }
 
         private static ToastPrompt GetToastPrompt()

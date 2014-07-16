@@ -51,7 +51,7 @@ namespace Davang.Utilities
                 double rateMb = 0;
                 lock (lockObj)
                 {
-                    current = DeviceStatus.ApplicationCurrentMemoryUsage / 1000000;
+                    current = DeviceStatus.ApplicationCurrentMemoryUsage / (1024 * 1024);
                     rate = 0;
                     if (_last != 0)
                     {
@@ -62,16 +62,16 @@ namespace Davang.Utilities
                     _last = current;
                 }
 
-                var limit = DeviceStatus.ApplicationMemoryUsageLimit / 1000000;
+                var limit = DeviceStatus.ApplicationMemoryUsageLimit / (1024 * 1024);
                 var available = limit - current;
 
                 report += Environment.NewLine +
                     "Current: " + current.ToString() + "MB\n" +
-                    "Increased: " + rateMb.ToString() + "MB (" + rate + "%)\n" +
+                    "Increased: " + rateMb.ToString() + "MB (" + rate.ToString("00.00") + "%)\n" +
                     "Available: " + available.ToString() + "MB\n" + 
-                    "Peak: " + (DeviceStatus.ApplicationPeakMemoryUsage / 1000000).ToString() + "MB\n" +
+                    "Peak: " + (DeviceStatus.ApplicationPeakMemoryUsage / (1024 * 1024)).ToString() + "MB\n" +
                     "Memory Limit: " + limit.ToString() + "MB\n" +
-                    "Working Limit: " + Convert.ToInt32((Convert.ToDouble(DeviceExtendedProperties.GetValue("ApplicationWorkingSetLimit")) / 1000000)).ToString() + "MB";
+                    "Working Limit: " + Convert.ToInt32((Convert.ToDouble(DeviceExtendedProperties.GetValue("ApplicationWorkingSetLimit")) / (1024 * 1024))).ToString() + "MB";
 
                 Deployment.Current.Dispatcher.BeginInvoke(delegate
                 {
@@ -80,8 +80,8 @@ namespace Davang.Utilities
 
             },
                 null,
-                TimeSpan.FromSeconds(3),
-                TimeSpan.FromSeconds(3));
+                TimeSpan.FromSeconds(2),
+                TimeSpan.FromSeconds(2));
         }
     }
 }

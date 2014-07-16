@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 
 namespace Davang.WP.Utilities
 {
-    public class BasePage : PhoneApplicationPage
+    public abstract class BasePage : PhoneApplicationPage
     {
         protected static string BackgroundImageUri;
         protected static string LayoutRoot;
@@ -36,7 +36,7 @@ namespace Davang.WP.Utilities
         {
             SetBackground();
             LogPage();
-            //this.Loaded -= BasePage_Loaded;
+            this.Loaded -= BasePage_Loaded;
         }
 
         protected void SetProgressIndicator(bool isVisible = true, string message = "")
