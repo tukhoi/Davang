@@ -39,8 +39,8 @@ namespace DocBao.WP.Helper
             toast.Message = message;
             toast.MillisecondsUntilHidden = miliSecondsUntilHidden;
             toast.Show();
-            if (toastCompleted != null)
-                toast.Completed -= toastCompleted;
+            //if (toastCompleted != null)
+            //    toast.Completed -= toastCompleted;
 
             toast = null;
         }

@@ -170,32 +170,23 @@ namespace Davang.Utilities.Helpers
 
         public static void SaveConfig(string key, object value)
         {
-            IsolatedStorageSettings isolatedStore = IsolatedStorageSettings.ApplicationSettings;
-            if (isolatedStore.Contains(key))
-                isolatedStore.Remove(key);
-            isolatedStore.Add(key, value);
-            isolatedStore.Save();
+            if (IsolatedStorageSettings.ApplicationSettings.Contains(key))
+                IsolatedStorageSettings.ApplicationSettings.Remove(key);
+            IsolatedStorageSettings.ApplicationSettings.Add(key, value);
+            IsolatedStorageSettings.ApplicationSettings.Save();
         }
 
-        public static bool LoadConfig(string key, out object result)
+        public static object LoadConfig(string key)
         {
-            IsolatedStorageSettings isolatedStore = IsolatedStorageSettings.ApplicationSettings;
+            if (IsolatedStorageSettings.ApplicationSettings.Contains(key))
+                return IsolatedStorageSettings.ApplicationSettings[key];
 
-            result = "";
-            try
-            {
-                result = isolatedStore[key];
-            }
-            catch
-            {
-                return false;
-            }
-            return true;
+            return null;
         }
 
         public static bool EnoughSpace(int mbToStore = 1)
         {
-            return IsolatedStorageFile.GetUserStoreForApplication().AvailableFreeSpace / 1000000 > mbToStore;
+            return IsolatedStorageFile.GetUserStoreForApplication().AvailableFreeSpace / (1024 * 1024) > mbToStore;
         }
     }
 }
