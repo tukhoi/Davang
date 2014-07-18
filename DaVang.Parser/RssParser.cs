@@ -100,10 +100,8 @@ namespace Davang.Parser
                     var isPermanent = guidElement.Attribute(xmlns + "isPermaLink") != null ? guidElement.Attribute(xmlns + "isPermaLink").Value : "true";
                     if (isPermanent.ToLower().Equals("true"))
                         id = xElement.Element(xmlns + "guid") != null ? xElement.Element(xmlns + "guid").Value : string.Empty;
-                    
-                    id = string.IsNullOrEmpty(id) || default(Guid).ToString().Equals(id.Trim()) ? clickUrl.Trim() : id.Trim();
                 }
-
+                id = string.IsNullOrEmpty(id) || default(Guid).ToString().Equals(id.Trim()) ? clickUrl.Trim() : id.Trim();
 
                 var item = new Item
                 {

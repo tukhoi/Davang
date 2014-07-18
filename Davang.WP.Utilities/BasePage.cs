@@ -3,6 +3,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,6 +48,23 @@ namespace Davang.WP.Utilities
             SystemTray.ProgressIndicator.IsIndeterminate = isVisible;
             SystemTray.ProgressIndicator.IsVisible = isVisible;
             SystemTray.ProgressIndicator.Text = message;
+        }
+
+        protected void ActionOnChildControls<T>(DependencyObject obj, DependencyProperty propName, string propValue, Action<DependencyObject> action)
+        {
+            var count = VisualTreeHelper.GetChildrenCount(obj);
+            if (count == 0)
+                return;
+
+            for (int i = 0; i < count; i++)
+            {
+                var child = VisualTreeHelper.GetChild(obj, i);
+
+                if (child != null && child is T && child.GetValue(propName).Equals(propValue)) 
+                    action(child);
+                else
+                    ActionOnChildControls<T>(child, propName, propValue, action);
+            }
         }
 
         protected void BackToMainPage()
