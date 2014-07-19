@@ -43,7 +43,7 @@ namespace Davang.Utilities.Helpers
             }
             catch (Exception ex)
             {
-                throw ex;
+                
             }
         }
     }
