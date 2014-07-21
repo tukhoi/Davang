@@ -89,6 +89,7 @@
     <Compile Include="Messenger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helper\WebBrowserHelper.cs" />
+    <Compile Include="ToolkitControl\CustomListPicker.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -96,6 +97,9 @@
   <ItemGroup>
     <Reference Include="Coding4Fun.Toolkit.Controls">
       <HintPath>..\..\DocBao\packages\Coding4Fun.Toolkit.Controls.2.0.7\lib\windowsphone8\Coding4Fun.Toolkit.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Phone.Controls.Toolkit">
+      <HintPath>..\..\DocBao\packages\MyWPToolkit\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
