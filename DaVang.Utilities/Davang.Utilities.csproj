@@ -90,6 +90,7 @@
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\QueryStringExtensions.cs" />
     <Compile Include="Extensions\WebClientExtensions.cs" />
+    <Compile Include="Helpers\MemoryHelper.cs" />
     <Compile Include="Log\GA.cs" />
     <Compile Include="Helpers\LicenseHelper.cs" />
     <Compile Include="Helpers\Serialization\BinaryFormatterHelper.cs" />
