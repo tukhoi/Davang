@@ -18,13 +18,13 @@ namespace Davang.WP.Utilities
     public abstract class BasePage : PhoneApplicationPage
     {
         protected static string BackgroundImageUri;
-        protected static string LayoutRoot;
+        protected static string LayoutRootName;
         protected static string MainPage;
 
         public static void Initialize(string backgroundImageUri = "/Images/background.png", string layoutRoot = "LayoutRoot", string mainPage = "MainPage")
         {
             BackgroundImageUri = backgroundImageUri;
-            LayoutRoot = layoutRoot;
+            LayoutRootName = layoutRoot;
             MainPage = mainPage;
         }
 
@@ -118,7 +118,7 @@ namespace Davang.WP.Utilities
 
         protected void SetBackground()
         {
-            SetBackground(LayoutRoot);
+            SetBackground(LayoutRootName);
         }
 
         protected void SetBackground(string rootControlName = "")
