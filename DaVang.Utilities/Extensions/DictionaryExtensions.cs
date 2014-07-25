@@ -8,7 +8,7 @@ namespace Davang.Utilities.Extensions
 {
     public static class DictionaryExtensions
     {
-        public static void AddTo<T>(this IDictionary<T, int> dictionary, T id, int value = 1)
+        public static void AppendValue<T>(this IDictionary<T, int> dictionary, T id, int value = 1)
         {
             if (dictionary.ContainsKey(id))
                 dictionary[id] += value;
