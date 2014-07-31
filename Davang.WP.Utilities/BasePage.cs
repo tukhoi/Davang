@@ -105,9 +105,19 @@ namespace Davang.WP.Utilities
                 NavigationService.RemoveBackEntry();
         }
 
-        protected void SetSecondPage()
+        protected void SetAsSecondPage()
         {
-            while (NavigationService.BackStack.Count() > 1)
+            SetAsNPage(2);
+        }
+
+        protected void SetAsThirdPage()
+        {
+            SetAsNPage(3);
+        }
+
+        protected void SetAsNPage(int n)
+        {
+            while (NavigationService.BackStack.Count() > n-1)
                 NavigationService.RemoveBackEntry();
         }
 
