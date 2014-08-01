@@ -138,7 +138,10 @@ namespace Davang.WP.Utilities
             if (grid != null)
             {
                 var background = new ImageBrush();
-                background.ImageSource = new BitmapImage(new Uri(BackgroundImageUri, UriKind.Relative));
+                background.ImageSource = new BitmapImage(new Uri(BackgroundImageUri, UriKind.Relative))
+                    {
+                        CreateOptions = BitmapCreateOptions.BackgroundCreation,
+                    };
                 grid.Background = background;
             }
         }

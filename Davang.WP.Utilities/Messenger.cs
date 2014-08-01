@@ -52,6 +52,7 @@ namespace DocBao.WP.Helper
             toast.TextOrientation = System.Windows.Controls.Orientation.Vertical;
             toast.ImageSource = new BitmapImage(new Uri(_toastImageUri, UriKind.Relative));
             toast.TextWrapping = System.Windows.TextWrapping.Wrap;
+            toast.CacheMode = new BitmapCache();
             if (!string.IsNullOrEmpty(_backgroundImageUri))
             {
                 var backgroundImage = new ImageBrush();
