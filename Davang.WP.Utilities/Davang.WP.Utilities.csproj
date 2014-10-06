@@ -85,6 +85,7 @@
   <ItemGroup>
     <Compile Include="BasePage.cs" />
     <Compile Include="Extensions\LongListSelectorExtensions.cs" />
+    <Compile Include="Extensions\StoryboardExtensions.cs" />
     <Compile Include="Helper\GestureHelper.cs" />
     <Compile Include="Messenger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
