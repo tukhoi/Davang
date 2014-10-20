@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace Davang.WP.Helper
+namespace Davang.WP.Utilities
 {
     public class Messenger
     {
