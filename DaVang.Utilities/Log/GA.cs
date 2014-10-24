@@ -28,7 +28,7 @@ namespace Davang.Utilities.Log
             }
         }
 
-        private static Tracker GetTracker()
+        public static Tracker GetTracker()
         {
             var tracker = new Tracker(_gaId, new PlatformInfoProvider(), GAServiceManager.Current);
             tracker.AppName = _appName;
