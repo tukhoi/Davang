@@ -15,5 +15,13 @@ namespace Davang.Utilities.Extensions
             else
                 dictionary.Add(id, value);
         }
+
+        public static void AppendValue<T>(this IDictionary<T, long> dictionary, T id, long value = 1)
+        {
+            if (dictionary.ContainsKey(id))
+                dictionary[id] += value;
+            else
+                dictionary.Add(id, value);
+        }
     }
 }
