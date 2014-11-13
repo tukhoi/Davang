@@ -85,6 +85,7 @@
   <ItemGroup>
     <Compile Include="ApplicationServices\BaseEntity.cs" />
     <Compile Include="ApplicationServices\BaseResult.cs" />
+    <Compile Include="Config\BaseAppConfig.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Extensions\EAPCommon.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
